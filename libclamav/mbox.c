@@ -3653,13 +3653,17 @@ rfc2047(const char *in)
 				break;
 		}
 		b = messageToBlob(m, 1);
+                if (b == NULL) {
+                    messageDestroy(m);
+                    break;
+                }
 		len = blobGetDataSize(b);
 		cli_dbgmsg("Decoded as '%*.*s'\n", (int)len, (int)len,
 			blobGetData(b));
 		memcpy(pout, blobGetData(b), len);
 		blobDestroy(b);
 		messageDestroy(m);
-		if(pout[len - 1] == '\n')
+		if(len > 0 && pout[len - 1] == '\n')
 			pout += len - 1;
 		else
 			pout += len;
