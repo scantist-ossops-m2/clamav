@@ -189,9 +189,6 @@ cli_untar(const char *dir, unsigned int posix, cli_ctx *ctx)
 				return CL_CLEAN;
 			}
 
-                        if (nread < TARCHECKSUMOFFSET + TARCHECKSUMLEN)
-                            return ret;
-
 			checksum = getchecksum(block);
 			cli_dbgmsg("cli_untar: Candidate checksum = %d, [%o in octal]\n", checksum, checksum);
 			if(testchecksum(block, checksum) != 0) {
