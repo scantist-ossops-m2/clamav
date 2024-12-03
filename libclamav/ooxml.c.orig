@@ -226,7 +226,7 @@ static int ooxml_content_cb(int fd, cli_ctx *ctx)
             cli_dbgmsg("%s: %s\n", name, value);
         }
 
-        if (!CT || !PN) continue;
+        if (!CT && !PN) continue;
 
         if (!xmlStrcmp(CT, (const xmlChar *)"application/vnd.openxmlformats-package.core-properties+xml")) {
             /* default: /docProps/core.xml*/
